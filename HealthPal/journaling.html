@@ -80,40 +80,22 @@
         document.getElementById('entryForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            var entryText = document.getElementById('journalEntry').value.trim();
+            var entryText = document.getElementById('journalEntry').value;
    
-            if (entryText !== '') {
-                // Send entry text to backend for classification
-                fetch('/classify', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ entryText: entryText })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Handle classification result
-                    console.log(data);
-                    // Update UI based on classification result if needed
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-
-                // Add the journal entry to the list (optional)
+            if (entryText.trim() !== '') {
                 var entryListItem = document.createElement('li');
                 entryListItem.className = 'entry';
                 entryListItem.textContent = entryText;
+
                 document.getElementById('entryList').appendChild(entryListItem);
 
-                // Clear the journal entry textarea
                 document.getElementById('journalEntry').value = '';
             } else {
                 alert('Please enter a journal entry.');
             }
         });
     </script>
+    
     
     
     
